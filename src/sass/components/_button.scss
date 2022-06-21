@@ -1,0 +1,81 @@
+.btn-primary {
+  &:link,
+  &:visited {
+    display: block;
+    position: absolute;
+    left: 25rem;
+    color: $color-black;
+    background-color: transparent;
+    height: 2.5rem;
+    width: 7rem;
+    text-align: center;
+    padding: 2px 1rem;
+    text-decoration: none;
+    border-bottom: 1px solid $color-black;
+    font-size: 2rem;
+    border-radius: 3px;
+    transition: all 0.2s;
+
+    @include respond(medium) {
+      left: 5rem;
+    }
+    @include respond(small) {
+      left: 2rem;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+    transform: translateY(-0.2rem);
+    background-color: $color-black;
+    color: $color-white;
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
+    transform: translateY(0);
+  }
+}
+
+.btn-prices {
+  float: right;
+  margin: 20px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 2.5rem;
+
+  @include respond(large) {
+    margin: 15px;
+  }
+  @include respond(medium) {
+    margin: 15px;
+  }
+  @include respond(small) {
+    margin: 5px;
+  }
+
+  &:link,
+  &:visited {
+    color: $color-white;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+}

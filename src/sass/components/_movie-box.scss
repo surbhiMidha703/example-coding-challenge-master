@@ -1,0 +1,119 @@
+.movie-box {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  animation-name: fade-in;
+  animation-duration: 2s;
+  animation-timing-function: ease;
+
+  &__poster {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 25rem;
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.5);
+  }
+
+  &__title-wrapper {
+    margin: 0 25%;
+    @include respond(medium) {
+      margin: 0 20%;
+    }
+    @include respond(small) {
+      margin: 0 10%;
+    }
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__text {
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 25%;
+    font-size: 1.5rem;
+
+    @include respond(large) {
+      margin: 0 20%;
+    }
+    @include respond(medium) {
+      margin: 0;
+    }
+    @include respond(small) {
+      margin: 0;
+    }
+  }
+
+  &__plot {
+    font-weight: 900;
+    font-size: 1.7rem;
+  }
+
+  &__rating {
+    margin: 20px 0;
+    height: 9rem;
+    width: 9rem;
+
+    @include respond(large) {
+      margin: 15px;
+    }
+    @include respond(medium) {
+      margin: 15px;
+    }
+    @include respond(small) {
+      margin: 5px;
+    }
+  }
+}
+
+#cheap {
+  padding: 1.5rem;
+  width: 17rem;
+  height: 6rem;
+  background-color: green;
+
+  @include respond(large) {
+    margin: 15px;
+  }
+  @include respond(medium) {
+    margin: 15px;
+  }
+  @include respond(small) {
+    margin: 5px;
+  }
+}
+
+#expensive {
+  padding: 1.5rem;
+  width: 17rem;
+  height: 6rem;
+  background-color: red;
+
+  @include respond(large) {
+    margin: 15px;
+  }
+  @include respond(medium) {
+    margin: 15px;
+  }
+  @include respond(small) {
+    margin: 5px;
+  }
+}
+
+#na {
+  padding: 1.5rem;
+  width: 17rem;
+  height: 6rem;
+  background-color: yellow;
+
+  @include respond(large) {
+    margin: 15px;
+  }
+  @include respond(medium) {
+    margin: 15px;
+  }
+  @include respond(small) {
+    margin: 5px;
+  }
+}

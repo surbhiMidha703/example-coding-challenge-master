@@ -1,0 +1,49 @@
+.heading-primary {
+  &--main {
+    @include respond(large) {
+      font-size: 3rem;
+    }
+    @include respond(medium) {
+      font-size: 3.5rem;
+      letter-spacing: 1rem;
+    }
+
+    font-family: $heading-font;
+    text-transform: uppercase;
+    display: block;
+    font-size: 5.5rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: move-in-top;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+  }
+}
+
+.heading-secondary {
+  font-family: $heading-font;
+  text-transform: uppercase;
+  font-size: 3.2rem;
+  font-weight: 200;
+  display: inline-block;
+  animation-name: fade-in;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+
+  @include respond(medium) {
+    font-size: 2rem;
+  }
+  @include respond(small) {
+    font-size: 1.5rem;
+  }
+}
+
+.cw {
+  font-family: $cinemaWorld-default-font;
+  font-size: 2.4rem;
+}
+
+.fw {
+  font-family: $filmWorld-default-font;
+  font-size: 2.4rem;
+}

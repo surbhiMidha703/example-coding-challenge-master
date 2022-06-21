@@ -1,0 +1,17 @@
+.section-features {
+  &__spinner {
+    display: block;
+    margin: 0 auto;
+    width: 15%;
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+  }
+}
+
+.error-message {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+  font-size: 3rem;
+}

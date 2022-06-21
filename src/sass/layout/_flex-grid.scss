@@ -1,0 +1,10 @@
+.row-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: $grid-width;
+  margin: 0 auto;
+  animation-name: fade-in;
+  animation-duration: 2.5s;
+  animation-timing-function: ease;
+}
