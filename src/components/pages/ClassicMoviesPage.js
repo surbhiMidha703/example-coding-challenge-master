@@ -1,38 +1,32 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect} from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { fetchCinemaWorld, fetchFilmWorld } from "../../actions/movie";
 import Movie from "../Movie";
 import loadingSpinner from "../../__ASSETS__/loadSpinner.gif";
 
-class ClassicMovies extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(fetchCinemaWorld(this.props.id));
-    this.props.dispatch(fetchFilmWorld(this.props.id));
-  }
+export const ClassicMoviesPage = () => {
+  const dispatch = useDispatch()
+  const movie = useSelector(state => state.movie)
+  const params = useParams()
 
-  render() {
+  useEffect(() => {
+    dispatch(fetchCinemaWorld(params.id))
+    dispatch(fetchFilmWorld(params.id))
+  },[])
+
     return (
       <main>
-        {this.props.movie.cinemaWorld.loading === true &&
-        this.props.movie.filmWorld.loading === true ? (
+        {movie.cinemaWorld.loading === true &&
+        movie.filmWorld.loading === true ? (
           <img
             className="section-features__spinner"
             src={loadingSpinner}
             alt="Loading spinner"
           />
         ) : (
-          <Movie movie={this.props.movie} />
+          <Movie movie={movie} />
         )}
       </main>
     );
   }
-}
-
-const mapStateToProps = (state, props) => {
-  return {
-    movie: state.movie,
-    id: props.match.params.id,
-  };
-};
-
-export default connect(mapStateToProps)(ClassicMovies);
