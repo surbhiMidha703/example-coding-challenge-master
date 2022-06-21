@@ -26,8 +26,8 @@ describe("Checks components are present on the landing page", () => {
 });
 
 describe("Checks elements within the components on the landing page are displayed accurately", () => {
-  it("Tests the error message is not visible if there is no error, or their is movies to be displayed", () => {
-    cy.get(".error-message").should("not.be.visible");
+  it("Tests the error message does not exist if there is no error, or their is movies to be displayed", () => {
+    cy.get(".error-message").should("not.exist");
   });
 
   it("Tests the fetch request has returned all the movies from the api", () => {
