@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Header from "../components/Header";
+import {Header} from "../components/Header";
 
 import LandingPage from "../components/pages/LandingPage";
 import ClassicMoviesPage from "../components/pages/ClassicMoviesPage";

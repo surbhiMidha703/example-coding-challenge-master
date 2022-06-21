@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import MovieListItem from "./MovieListItem";
+import {MovieListItem} from "./MovieListItem";
 import loadingSpinner from "../__ASSETS__/loadSpinner.gif";
 
 const MovieList = (props) => {

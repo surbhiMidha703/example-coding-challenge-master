@@ -1,6 +1,6 @@
 import React from "react";
 
-const About = () => {
+export const About = () => {
   return (
     <div className="about-text">
       <h2 className="heading-secondary">Classic Movies At Home</h2>
@@ -13,7 +13,5 @@ const About = () => {
         on all streaming services.
       </p>
     </div>
-  );
-};
-
-export default About;
+  )
+}

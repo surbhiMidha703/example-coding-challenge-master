@@ -1,7 +1,13 @@
-import React from "react";
+import React, {FC} from "react";
 import { Link } from "react-router-dom";
 
-const MovieListItem = ({ ID, Title, Poster }) => {
+interface IMovieListItem {
+  ID: string,
+  Title: string,
+  Poster: string
+
+}
+export const MovieListItem: FC<IMovieListItem> = ({ ID, Title, Poster }) => {
   const slicedID = ID.slice(2, 9);
 
   return (
@@ -16,4 +22,3 @@ const MovieListItem = ({ ID, Title, Poster }) => {
   );
 };
 
-export default MovieListItem;
