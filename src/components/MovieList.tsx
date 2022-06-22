@@ -1,10 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import {MovieListItem} from "./MovieListItem";
 import loadingSpinner from "../__ASSETS__/loadSpinner.gif";
+import { IMovieData } from "./pages/types";
+import { RootState } from "..";
 
-const MovieList = (props) => {
-  const { error, loading, movies } = props;
+export const MovieList = () => {
+  const movies = useSelector((state: RootState) => state.movies.items)
+  const loading = useSelector((state: RootState) => state.movies.loading) 
+  const error = useSelector((state: RootState) => state.movies.error)
 
   if (error) {
     return <div className="error-message">Error! {error.message}</div>;
@@ -21,7 +25,7 @@ const MovieList = (props) => {
       ) : (
         <div className="row-wrap">
           {movies ? (
-            movies.map((movie) => {
+            movies.map((movie: IMovieData) => {
               return <MovieListItem key={movie.ID} {...movie} />;
             })
           ) : (
@@ -35,10 +39,3 @@ const MovieList = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  movies: state.movies.items,
-  loading: state.movies.loading,
-  error: state.movies.error,
-});
-
-export default connect(mapStateToProps)(MovieList);

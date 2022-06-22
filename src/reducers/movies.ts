@@ -1,16 +1,30 @@
+import { AnyAction } from "redux";
 import {
   FETCH_MOVIES_BEGIN,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
 } from "../actions/movies";
 
-const initialState = {
+interface IInitialState {
+  items: [],
+  loading: boolean,
+  error: {message: string} | null,
+}
+
+const initialState: IInitialState = {
   items: [],
   loading: false,
   error: null,
 };
 
-export default function moviesReducer(state = initialState, action) {
+// interface IAction {
+//   type: string,
+//   payload: {
+//     movies: [],
+//     error: string
+//   }
+// }
+export default function moviesReducer(state = initialState, action: AnyAction): IInitialState {
   switch (action.type) {
     case FETCH_MOVIES_BEGIN:
       return {

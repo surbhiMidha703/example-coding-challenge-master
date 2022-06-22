@@ -25,7 +25,8 @@
     "test": "cross-env NODE_ENV=test react-scripts test --testPathIgnorePatterns=src/__tests__/fixtures  --watch",
     "cypress": "cypress open",
     "eject": "react-scripts eject",
-    "compile:sass": "node-sass src/sass/main.scss src/css/style.css"
+    "compile:sass": "node-sass src/sass/main.scss src/css/style.css",
+    "lint:fix": "eslint --fix --ext .ts,.tsx ."
   },
   "eslintConfig": {
     "extends": "react-app"

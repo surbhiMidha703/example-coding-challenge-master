@@ -1,11 +1,10 @@
 import React, { useEffect} from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCinemaWorld, fetchFilmWorld } from "../../actions/movie";
-import Movie from "../Movie";
+import {Movie} from "../Movie";
 import loadingSpinner from "../../__ASSETS__/loadSpinner.gif";
 import { RootState } from "../..";
-import { IMovie } from "./types";
 
 export const ClassicMoviesPage = () => {
   const dispatch = useDispatch()

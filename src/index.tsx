@@ -1,18 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import AppRouter from "./routers/AppRouter";
+import {AppRouter} from "./routers/AppRouter";
 import "./css/style.css";
 import * as serviceWorker from "./serviceWorker";
 
 import { fetchMovies } from "./actions/movies";
 
-import configureStore from "./store/configureStore";
+import {configureStore} from "./store/configureStore";
 
 const store = configureStore();
 
 export type RootState = ReturnType<typeof store.getState>
 
+//@ts-ignore
 store.dispatch(fetchMovies());
 
 const wrappedApplication = (

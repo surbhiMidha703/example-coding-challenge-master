@@ -7,7 +7,7 @@ import {
 
 interface IInitialState {
  loading: boolean,
- data: {},
+ data: any,
  error: string|null
 }
 
