@@ -1,17 +1,23 @@
-import { combineReducers } from "redux";
+import { AnyAction, combineReducers } from "redux";
 import {
   FETCH_MOVIE_BEGIN,
   FETCH_MOVIE_SUCCESS,
   FETCH_MOVIE_FAILURE,
 } from "../actions/movie";
 
-const initialState = {
+interface IInitialState {
+ loading: boolean,
+ data: {},
+ error: string|null
+}
+
+const initialState: IInitialState = {
   loading: false,
   data: {},
   error: null,
 };
 
-const movieReducer = (provider) => (state = initialState, action) => {
+const movieReducer = (provider: string) => (state = initialState, action: AnyAction): IInitialState => {
   if (action.payload && action.payload.provider === provider) {
     switch (action.type) {
       case FETCH_MOVIE_BEGIN:
