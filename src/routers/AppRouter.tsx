@@ -14,7 +14,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/ClassicMovies/:id" element={<ClassicMoviesPage/>} />
-        <Route element={<NotFoundPage/>} />
+        <Route path="*" element={<NotFoundPage/>} />
       </Routes>
     </Router>
   );
