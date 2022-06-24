@@ -1,7 +1,8 @@
 import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchCinemaWorld, fetchFilmWorld } from "../../actions/movie";
+// import { fetchCinemaWorld, fetchFilmWorld } from "../../actions/movie";
+import {fetchMoviesFromStreamingProviders} from "../../actions/movie"
 import {Movie} from "../Movie";
 import loadingSpinner from "../../__ASSETS__/loadSpinner.gif";
 import { RootState } from "../..";
@@ -12,8 +13,9 @@ export const ClassicMoviesPage = () => {
   const params = useParams()
 
   useEffect(() => {
-    dispatch(fetchCinemaWorld(params.id))
-    dispatch(fetchFilmWorld(params.id))
+    // dispatch(fetchCinemaWorld(params.id))
+    // dispatch(fetchFilmWorld(params.id))
+    dispatch(fetchMoviesFromStreamingProviders(params.id))
   },[])
 
     return (

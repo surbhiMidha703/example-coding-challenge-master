@@ -23,13 +23,36 @@ const headers = {
 
 const cinemaWorldUrl = `${process.env.REACT_APP_BASE_URL}cinemaworld/movies`;
 
-let fetchRequest = 3;
+// let fetchRequest = 3;
+// export function fetchMovies() {
+//   return (dispatch) => {
+//     dispatch(fetchMoviesBegin());
+//     fetchRequest--;
+//     return fetch(cinemaWorldUrl, {
+//       headers,
+//     })
+//       .then(errorMessage)
+//       .then((res) => res.json())
+//       .then((json) => {
+//         dispatch(fetchMoviesSuccess(json["Movies"]));
+//         return json;
+//       })
+//       .catch((error) =>
+//         fetchRequest > 0
+//           ? dispatch(fetchMovies())
+//           : dispatch(fetchMoviesFailure(error))
+//       );
+//   };
+// }
+
+
 export function fetchMovies() {
   return (dispatch) => {
     dispatch(fetchMoviesBegin());
-    fetchRequest--;
     return fetch(cinemaWorldUrl, {
       headers,
+      retries: 3,
+      retryDelay: 1000
     })
       .then(errorMessage)
       .then((res) => res.json())
@@ -38,9 +61,7 @@ export function fetchMovies() {
         return json;
       })
       .catch((error) =>
-        fetchRequest > 0
-          ? dispatch(fetchMovies())
-          : dispatch(fetchMoviesFailure(error))
+           dispatch(fetchMoviesFailure(error))
       );
   };
 }
