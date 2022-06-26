@@ -5,7 +5,7 @@ import {
   FETCH_MOVIE_FAILURE,
 } from "../actions/movie";
 
-interface IInitialState {
+export interface IInitialState {
  loading: boolean,
  data: any,
  error: string|null

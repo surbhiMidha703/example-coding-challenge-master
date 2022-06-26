@@ -1,5 +1,5 @@
 import movieReducer from "../../reducers/movie";
-import movie from "../fixtures/movie";
+import movieObject from "../fixtures/movie";
 
 test("Should set the movie default state", () => {
   const state = movieReducer(undefined, { type: "@@INIT" });
@@ -26,13 +26,14 @@ test("Should begin fetching individual movie", () => {
   expect(state.filmWorld.data).toEqual({});
 });
 
-test("Should return success when movie is fetched", () => {
+test.only("Should return success when movie is fetched", () => {
   const provider = "cinemaWorld";
+  const movie = JSON.stringify(movieObject);
   const action = {
     type: "FETCH_MOVIE_SUCCESS",
     payload: { movie, provider },
   };
-  const state = movieReducer(movie, action);
+  const state = movieReducer(movieObject, action);
   expect(state.cinemaWorld.data.movie).toEqual(movie);
 });
 
