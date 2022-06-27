@@ -4,15 +4,23 @@ import { fetchMoviesFromStreamingProviders } from "../../actions/movie";
 import { useSelector, Provider } from "react-redux";
 import { IInitialState } from "../../reducers/movie";
 import configureStore from "redux-mock-store";
-import { renderWithStore } from "../../__tests__/rtl-test-helper";
-import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
-
+import {
+  renderWithIntl,
+  renderWithStore,
+} from "../../__tests__/rtl-test-helper";
+import { createMemoryHistory } from "history";
+import { createStore, applyMiddleware } from "redux";
+import { rootReducer } from "../../store/configureStore";
+import thunk from "redux-thunk";
+// import { Store } from "../../store/configureStore";
+const storeMiddleware = applyMiddleware(thunk);
 // const mockUseSelector = useSelector as jest.Mock
 const mockUseSelector = useSelector;
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
-  useDispatch: jest.fn(),
+  //   useDispatch: jest.fn().mockReturnValue ("dispatched action"),
+  useDispatch: () => jest.fn(),
   // ...jest.useAc
 }));
 
@@ -42,14 +50,36 @@ afterEach(() => {
 test("page is loading when data is being fetched", async () => {
   const history = createMemoryHistory();
   const initialState = {
-    loading: true,
-    data: {},
-    error: null,
+    movies: {
+      loading: false,
+      error: null,
+    },
+    movie: {
+      cinemaWorld: {
+        loading: true,
+        data: {},
+        error: null,
+      },
+      filmWorld: {
+        loading: true,
+        data: {},
+        error: null,
+      },
+    },
   };
-
+  const store = createStore(rootReducer, initialState, storeMiddleware);
+  renderWithIntl(
+    <Provider store={store}>
+      <Router location={history.location} navigator={history}>
+        <ClassicMoviesPage />
+      </Router>
+    </Provider>
+  );
   //   const options = { initialState };
   //   render(<ClassicMoviesPage/>)
-  <Router location={history.location} navigator={history}>
-    {renderWithStore(<ClassicMoviesPage />, initialState)}
-  </Router>;
+  //   <Router location={history.location} navigator={history}>
+  //   renderWithIntl(<ClassicMoviesPage />, initialState, history);
+  //   </Router>;
+
+  screen.debug();
 });
