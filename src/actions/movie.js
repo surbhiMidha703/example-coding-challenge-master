@@ -67,8 +67,6 @@ const headers = {
 //   };
 // };
 
-
-
 // const urls = [
 //   "https://swapi.co/api/people/1",
 //   "https://swapi.co/api/people/2",
@@ -88,28 +86,33 @@ const headers = {
 // }
 // fetchData()
 
-
-
-export const fetchMoviesFromStreamingProviders = (id) => async(dispatch) => {
+export const fetchMoviesFromStreamingProviders = (id) => async (dispatch) => {
   const movieURLs = [
     `${process.env.REACT_APP_BASE_URL}filmworld/movie/fw${id}`,
-    `${process.env.REACT_APP_BASE_URL}cinemaworld/movie/cw${id}`
-  ]
+    `${process.env.REACT_APP_BASE_URL}cinemaworld/movie/cw${id}`,
+  ];
 
+  let response;
   try {
-    dispatch(fetchMovieBegin("cinemaWorld"))
-    dispatch(fetchMovieBegin("filmWorld"))
-    const response = await Promise.allSettled(
-      movieURLs.map(url => fetch(url, {
-        headers,
-        retries: 3,
-        retryDelay: 1000
-      }).then(res=> res.json()))
-    )
+    await dispatch(fetchMovieBegin("cinemaWorld"));
+    await dispatch(fetchMovieBegin("filmWorld"));
+    response = await Promise.allSettled(
+      movieURLs.map((url) =>
+        fetch(url, {
+          headers,
+          retries: 3,
+          retryDelay: 1000,
+        }).then((res) => res.json())
+      )
+    );
     await dispatch(fetchMovieSuccess(response[0].value, "cinemaWorld"));
     await dispatch(fetchMovieSuccess(response[1].value, "filmWorld"));
-    console.log('movies', response)
-  } catch(error) {
-    console.log('error=> ',error)
+    console.log("movies", response);
+  } catch (e) {
+    const errors = response
+      .filter((res) => res.status === "reject")
+      .map((res) => res.reason)
+      .toString();
+    dispatch(fetchMovieFailure(errors));
   }
-}
+};
