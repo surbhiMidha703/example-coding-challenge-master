@@ -158,7 +158,9 @@ a {
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
   transition: transform 0.3s;
   height: 39rem;
-  width: 25rem; }
+  width: 25rem;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; }
   .feature-box:hover {
     transform: translateY(-1.5rem) scale(1.03);
     cursor: pointer; }
@@ -168,13 +170,11 @@ a {
   .feature-box__image {
     width: 100%;
     height: 35rem;
-    background-size: cover;
-    backface-visibility: hidden; }
+    background-size: cover; }
   .feature-box__text {
     font-size: 1.6rem;
     color: black;
-    margin-top: 5px;
-    backface-visibility: hidden; }
+    margin-top: 5px; }
 
 .movie-box {
   display: flex;
@@ -229,6 +229,10 @@ a {
     @media (max-width: 600px) {
       .movie-box__rating {
         margin: 5px; } }
+  .movie-box__convertPrice {
+    width: 12rem;
+    height: 12rem;
+    background-color: aquamarine; }
 
 #cheap {
   padding: 1.5rem;
