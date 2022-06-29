@@ -5,7 +5,7 @@
     Poster: string,
     Plot: string,
     Rated: string,
-    Price: string
+    Price: number
 }
 
 interface IFilmWorld {

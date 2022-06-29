@@ -105,8 +105,9 @@ export const fetchMoviesFromStreamingProviders = (id) => async (dispatch) => {
         }).then((res) => res.json())
       )
     );
-    await dispatch(fetchMovieSuccess(response[0].value, "cinemaWorld"));
-    await dispatch(fetchMovieSuccess(response[1].value, "filmWorld"));
+    console.log("response=> ", response);
+    await dispatch(fetchMovieSuccess(response[0]?.value, "filmWorld"));
+    await dispatch(fetchMovieSuccess(response[1]?.value, "cinemaWorld"));
     console.log("movies", response);
   } catch (e) {
     const errors = response

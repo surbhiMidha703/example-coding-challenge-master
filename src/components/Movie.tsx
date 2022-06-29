@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import colorizePrice from "../utils/colorizePrice";
 import ratingDisplay from "../utils/ratingDisplay";
@@ -11,28 +11,29 @@ interface IMovieInterface {
 export const Movie: FC<IMovieInterface> = ({ movie }) => {
   const cinemaWorld: IMovieData = movie?.cinemaWorld?.data?.movie
   const filmWorld: IMovieData = movie?.filmWorld?.data?.movie
-  const [priceFilmWorld, setPriceFilmWorld] = useState(filmWorld?.Price)
-  const [priceCinemaWorld, setPriceCinemaWorld] = useState(cinemaWorld?.Price)
-  // const [priceCinemaWorld, setPriceCinemaWorld] = useState(parseInt(cinemaWorld?.Price))
-  const [currencyType, setCurrencyType] = useState<string>('dollar')
+  const [priceCinemaWorld, setPriceCinemaWorld] = useState(0)
+  const [priceFilmWorld, setPriceFilmWorld] = useState(0)
+  const [currencyType, setCurrencyType] = useState<string>('pound')
+  const [currSym, setCurrSym] = useState('$')
 
-  const convertPrice = () => {
+  useEffect(()=> {
+    setPriceFilmWorld(filmWorld?.Price)
+    setPriceCinemaWorld(cinemaWorld?.Price)
+  },[filmWorld?.Price, cinemaWorld?.Price])
+
+  const convertPrice = (e) => {
     console.log('hello')
-    if(currencyType === 'pound'){
-      setPriceCinemaWorld((parseFloat(cinemaWorld.Price) * 0.56).toFixed(2))
-      setPriceFilmWorld((parseFloat(filmWorld.Price) * 0.56).toFixed(2))
+  if(e.target.value === 'pound'){
+      setPriceCinemaWorld(parseFloat((cinemaWorld?.Price * 0.56).toFixed(2)))
+      setPriceFilmWorld(parseFloat((filmWorld?.Price * 0.56).toFixed(2)))
       setCurrencyType('dollar')
+      setCurrSym('£')
     } else {
-      setPriceCinemaWorld((parseFloat(cinemaWorld.Price) * 1.77).toFixed(2))
-      setPriceFilmWorld((parseFloat(priceCinemaWorld) * 1.77).toFixed(2))
+      setPriceCinemaWorld(cinemaWorld.Price)
+      setPriceFilmWorld(filmWorld.Price)
       setCurrencyType('pound')
+      setCurrSym('$')
     }
-    console.log('priceFilmWorld=> ',priceFilmWorld)
-    console.log('priceFilmWorld=> ',priceFilmWorld)
-  }
-
-  const addCurrType = () => {
-    return currencyType === 'dollar' ? '$' : '£'
   }
 
   return (
@@ -64,20 +65,20 @@ export const Movie: FC<IMovieInterface> = ({ movie }) => {
           <a
             href="#"
             className="btn-prices"
-            id={colorizePrice(filmWorld?.Price, cinemaWorld?.Price)}
+            id={colorizePrice(priceFilmWorld, priceCinemaWorld)}
           >
             <p className="fw">Film World</p>
-            {filmWorld?.Price ? addCurrType() + filmWorld?.Price : <p>N/A</p>}
+            {filmWorld?.Price ? currSym + priceFilmWorld : <p>N/A</p>}
           </a>
           <a
             href="#"
             className="btn-prices"
-            id={colorizePrice(cinemaWorld?.Price, filmWorld?.Price)}
+            id={colorizePrice(priceCinemaWorld, priceFilmWorld)}
           >
             <p className="cw">Cinema World</p>
-            {cinemaWorld?.Price ? addCurrType() + priceCinemaWorld : <p>N/A</p>}
+            {cinemaWorld?.Price ? currSym + priceCinemaWorld : <p>N/A</p>}
           </a>
-        <button onClick={() => convertPrice()} className='movie-box__convertPrice' aria-label='convertPrice'>Change to {currencyType}</button>
+        <button onClick={(e) => convertPrice(e)} className='movie-box__convertPrice' aria-label='convertPrice' value={currencyType}>Change to {currencyType}</button>
         </div>
       </div>
     </section>
